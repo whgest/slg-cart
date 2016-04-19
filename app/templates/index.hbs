@@ -1,0 +1,49 @@
+
+<div class="col-xs-8">
+	<h2 class="title-text">Available Products</h2>
+
+	<table class="table table-striped">
+		<tbody>
+		{{#each model as |product|}}
+			<tr>
+				<td class="add-button-cell">
+					<span {{action "addItem" product}} class="fa-stack fa-lg pull-left add-button">
+					  <i class="fa fa-circle fa-stack-2x"></i>
+					  <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+					</span>
+				</td>
+				<td>
+					<h4> {{product.sku}} - {{product.itemName}}</h4>
+					<h5 class="product-description"> {{product.description}}</h5>
+				</td>
+				<td>
+					<h4 class="pull-right"> ${{format-currency product.basePrice}} </h4>
+				</td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+
+	<div class="col-xs-5 pull-right reset-button" {{action "resetCart"}}>Reset Cart</div>
+</div>
+
+<div class="col-xs-4 contrast">
+	<h3 class="title-text text-center">Cart</h3>
+	{{#each userCart.contents as |product|}}
+		<div class="col-xs-9 pull-left cart-line">
+			<span class="fa fa-trash" {{action "removeItem" product}}></span>
+			<span> {{product.sku}} - {{product.itemName}}</span>
+		</div>
+		<span class="cart-price col-xs-3 pull-right"> ${{format-currency product.modifiedPrice}} </span>
+	{{/each}}
+
+
+	<span class="fa-stack fa-7x col-xs-4 col-xs-offset-3">
+	  <i class="fa fa-circle-thin fa-stack-2x"></i>
+	  <h2 class="fa-stack-1x total-text">${{userCart.totalPrice}}</h2>
+	</span>
+	
+
+</div>
+
+
